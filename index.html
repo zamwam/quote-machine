@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10243d">
+  <title>Quote Generator | A-Affordable Insurance</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="A-Affordable Insurance home">
+        <span class="brand-mark">A+</span>
+        <span><strong>A-AFFORDABLE</strong><small>INSURANCE</small></span>
+      </a>
+      <div class="side-label">WORKSPACE</div>
+      <a class="nav-item active" href="#"><span>▤</span> Quote Generator</a>
+      <div class="sidebar-note">
+        <strong>Insurance, made clearer.</strong>
+        <p>Create polished, customer-ready insurance quotes in minutes.</p>
+      </div>
+      <div class="sidebar-footer">MASSACHUSETTS<br>Serving Massachusetts since 1984</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">A-AFFORDABLE INSURANCE / SALES TOOLS</div>
+          <h1>Quote Generator</h1>
+          <p class="subheading">Build, review, and print professional insurance quotes.</p>
+        </div>
+        <div class="top-actions">
+          <span class="saved-indicator" id="saveStatus">● Changes saved in this browser</span>
+          <button class="btn btn-light" id="newQuoteBtn" type="button">＋ New quote</button>
+          <button class="btn btn-primary" id="printBtn" type="button">⇩ Export / Print PDF</button>
+        </div>
+      </header>
+
+      <div class="workspace">
+        <section class="editor-panel">
+          <div class="panel-heading">
+            <div><span class="step">01</span><h2>Quote information</h2></div>
+            <span class="muted">Internal editor</span>
+          </div>
+          <form id="quoteForm">
+            <section class="form-section">
+              <h3>Customer details</h3>
+              <div class="form-grid two">
+                <label>Customer name<input id="customerName" placeholder="e.g. John Smith" autocomplete="name"></label>
+                <label>Phone number<input id="phone" placeholder="(508) 555-0123" autocomplete="tel"></label>
+                <label>Email address<input id="email" type="email" placeholder="customer@email.com" autocomplete="email"></label>
+                <label>Quote date<input id="quoteDate" type="date"></label>
+                <label class="span-two">Mailing address<input id="address" placeholder="Street, City, State, ZIP" autocomplete="street-address"></label>
+              </div>
+            </section>
+
+            <section class="form-section">
+              <h3>Policy details</h3>
+              <div class="form-grid two">
+                <label>Insurance carrier<input id="carrier" placeholder="Select or enter carrier"></label>
+                <label>Policy type
+                  <select id="policyType">
+                    <option>Personal Auto</option><option>Commercial Auto</option><option>Homeowners</option>
+                    <option>Renters</option><option>Motorcycle</option><option>Other</option>
+                  </select>
+                </label>
+                <label>Quote / policy reference<input id="policyNumber" placeholder="Optional reference number"></label>
+                <label>Policy term
+                  <select id="policyTerm"><option>12 months</option><option>6 months</option><option>Other</option></select>
+                </label>
+                <label>Effective date<input id="effectiveDate" type="date"></label>
+                <label>Expiration date<input id="expirationDate" type="date"></label>
+                <label class="span-two">Vehicle / property details<input id="riskDetails" placeholder="e.g. 2022 Honda Accord"></label>
+              </div>
+            </section>
+
+            <section class="form-section">
+              <div class="section-title-row"><h3>Coverage details</h3><span class="hint">Enter limits, options, and deductibles</span></div>
+              <textarea id="coverage" rows="6" placeholder="Bodily Injury: 100/300&#10;Property Damage: $100,000&#10;PIP: $8,000&#10;Collision: $1,000 deductible&#10;Comprehensive: $1,000 deductible"></textarea>
+              <div class="form-grid two compact-grid">
+                <label>Collision deductible ($)<input id="collisionDeductible" type="number" min="0" step="50" placeholder="1000"></label>
+                <label>Comprehensive deductible ($)<input id="comprehensiveDeductible" type="number" min="0" step="50" placeholder="1000"></label>
+              </div>
+            </section>
+
+            <section class="form-section">
+              <h3>Premium &amp; payment breakdown</h3>
+              <div class="form-grid two">
+                <label>Premium for full policy term ($)<input id="premium" type="number" min="0" step="0.01" placeholder="6078.00"></label>
+                <label>Down payment ($)<input id="downPayment" type="number" min="0" step="0.01" placeholder="1315.60"></label>
+                <label>Agency fee ($)<input id="agencyFee" type="number" min="0" step="0.01" value="100.00"></label>
+                <label>Monthly installment ($)<input id="monthlyPayment" type="number" min="0" step="0.01" placeholder="583.37"></label>
+                <label>Number of installments<input id="installments" type="number" min="0" step="1" value="9"></label>
+                <label>Payment frequency<select id="frequency"><option>Monthly</option><option>Quarterly</option><option>Other</option></select></label>
+              </div>
+              <div class="calc-strip">
+                <div><span>Down payment</span><strong id="calcDown">$0.00</strong></div>
+                <div><span>Installments total</span><strong id="calcInstallments">$0.00</strong></div>
+                <div class="calc-total"><span>Scheduled total</span><strong id="calcTotal">$0.00</strong></div>
+              </div>
+              <p class="microcopy">Scheduled total = down payment + installments. The agency fee is displayed separately; include it in the payment amount only if it is actually collected there.</p>
+            </section>
+
+            <section class="form-section">
+              <h3>Additional information</h3>
+              <div class="form-grid two">
+                <label>Prepared by<input id="agent" placeholder="Agent name"></label>
+                <label>Office / location<input id="office" placeholder="Office location (optional)"></label>
+              </div>
+              <label class="full-label">Notes / payment instructions<textarea id="notes" rows="3" placeholder="Add payment instructions, quote conditions, or other details..."></textarea></label>
+            </section>
+            <div class="form-actions">
+              <button class="btn btn-light" type="button" id="resetBtn">Reset fields</button>
+              <button class="btn btn-primary" type="button" id="printBtnBottom">Export / Print PDF</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="preview-column">
+          <div class="preview-heading"><div><span class="step">02</span><h2>Customer preview</h2></div><span class="live-pill"><i></i> LIVE PREVIEW</span></div>
+          <article class="quote-paper" id="quotePreview">
+            <div class="paper-top">
+              <div class="paper-brand"><span class="paper-mark">A+</span><div><strong>A-AFFORDABLE</strong><small>INSURANCE</small></div></div>
+              <div class="quote-tag">INSURANCE QUOTE<br><b>PREPARED FOR YOU</b></div>
+            </div>
+            <div class="paper-rule"></div>
+            <div class="paper-title-row"><div><div class="paper-kicker">YOUR INSURANCE PROPOSAL</div><h2>Insurance Quote</h2></div><div class="quote-number"><span>QUOTE REFERENCE</span><b id="pPolicyNumber">—</b></div></div>
+            <div class="customer-block">
+              <div><span class="paper-label">PREPARED FOR</span><strong id="pName">Customer name</strong><p id="pAddress">Customer address</p><p id="pContact">Phone · Email</p></div>
+              <div class="date-block"><span class="paper-label">QUOTE DATE</span><strong id="pQuoteDate">—</strong><span class="paper-label effective-label">EFFECTIVE DATE</span><strong id="pEffective">—</strong></div>
+            </div>
+            <div class="paper-section">
+              <div class="paper-section-heading">POLICY OVERVIEW</div>
+              <div class="overview-grid">
+                <div><span>INSURANCE CARRIER</span><b id="pCarrier">Not specified</b></div>
+                <div><span>POLICY TYPE</span><b id="pType">Personal Auto</b></div>
+                <div><span>POLICY TERM</span><b id="pTerm">12 months</b></div>
+                <div><span>VEHICLE / PROPERTY</span><b id="pRisk">Not specified</b></div>
+              </div>
+            </div>
+            <div class="paper-section">
+              <div class="paper-section-heading">COVERAGE &amp; PROTECTION</div>
+              <div class="coverage-preview" id="pCoverage">Coverage details will appear here.</div>
+              <div class="deductible-row"><span>Collision deductible <b id="pCollision">$—</b></span><span>Comprehensive deductible <b id="pComprehensive">$—</b></span></div>
+            </div>
+            <div class="paper-section payment-section">
+              <div class="paper-section-heading">PREMIUM &amp; PAYMENT SUMMARY</div>
+              <div class="payment-line"><span>Premium for policy term</span><b id="pPremium">$0.00</b></div>
+              <div class="payment-line"><span>Down payment</span><b id="pDown">$0.00</b></div>
+              <div class="payment-line"><span>Agency fee</span><b id="pFee">$0.00</b></div>
+              <div class="payment-line"><span id="pInstallmentLabel">9 monthly installments</span><b id="pMonthly">$0.00</b></div>
+              <div class="payment-total"><div><span>ESTIMATED SCHEDULED TOTAL</span><strong id="pTotal">$0.00</strong></div><small>Down payment + scheduled installments</small></div>
+            </div>
+            <div class="paper-section notes-section" id="pNotesSection" hidden><div class="paper-section-heading">ADDITIONAL NOTES</div><p id="pNotes"></p></div>
+            <div class="paper-disclaimer">This quote is an estimate and is subject to carrier underwriting, eligibility, and final policy terms. Coverage is not bound until confirmed by the insurance carrier or an authorized representative.</div>
+            <div class="paper-footer"><div><strong>A-AFFORDABLE INSURANCE</strong><span>Serving Massachusetts since 1984</span></div><div><strong>1-800-897-2837</strong><span id="pOffice">Massachusetts</span></div></div>
+          </article>
+          <div class="preview-tip">Tip: Use <b>Export / Print PDF</b> to save this customer-ready quote as a PDF. Choose “Save as PDF” in your print dialog.</div>
+        </section>
+      </div>
+      <footer class="site-footer">© <span id="year"></span> A-Affordable Insurance <span>·</span> Internal quote preparation tool</footer>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
