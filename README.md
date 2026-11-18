@@ -12,16 +12,21 @@ A standalone, responsive HTML/CSS/JavaScript quote-building website.
 Upload `index.html`, `styles.css`, and `app.js` to the root of a GitHub repository and enable GitHub Pages under Settings → Pages. You can also upload the files to your existing web host.
 
 ## Included
-- Responsive company-branded interface
-- Customer and policy information
-- Carrier, coverage, deductibles, premium and payment fields
-- Live quote preview
-- Payment calculations
+- Responsive A-Affordable-branded interface
+- Dropdown-driven customer and policy quote workflow
+- Carrier installment, premium financing, and paid-in-full arrangements
+- Editable monthly installment amount
+- Optional flat finance-charge estimate for premium-financed policies
+- Live quote preview and payment calculations
 - Browser-local draft saving
-- Print stylesheet for clean letter-size PDF output
+- Print stylesheet for letter-size PDF output
 
-## Notes
+## Financing calculation
+For a financed quote, the tool estimates a flat finance charge by applying the entered percentage to the premium balance after the down payment. It divides that balance plus the estimated charge by the selected installment count. The monthly payment field remains editable so an agent can enter the exact amount provided by the finance company. If manually overridden, the displayed finance-charge estimate is derived from the resulting scheduled payments compared with the quoted premium.
+
+This is a quote illustration only. It is **not an APR calculation**, amortization schedule, lender payoff amount, or substitute for the finance company's disclosed terms. Use the finance company's actual payment and charges when available. Agency fee is shown separately and is not included in the scheduled total calculation.
+
+## Data and limitations
 - Drafts are saved in the browser's local storage on the device being used. They are not shared between employees or devices.
 - This version does not connect to an insurance carrier, issue a policy, or bind coverage.
 - Review all quote figures and carrier terms before sharing with a customer.
-- Company phone and service-history wording are based on the supplied reference site. Update these in `index.html` if needed.
